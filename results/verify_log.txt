@@ -1,4 +1,4 @@
-PMM-RTE verification — 2026-06-28 17:03:37 EEST
+PMM-RTE verification — 2026-06-28 18:30:15 EEST
   [PASS] G1 stamp columns present (est_version/phase/seed_base)
   [PASS] G2a PMM2/OLS on normal in [0.85,1.15]
   [PASS] G2b PMM2_RTE_Stable/RTE_CV on normal <= 1.15 (no harm)

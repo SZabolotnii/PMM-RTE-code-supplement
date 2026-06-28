@@ -62,10 +62,23 @@ run_dataset <- function(spec, scale_name) {
   mf <- make_model_frame(spec, scale_name); if (is.null(mf)) return(NULL)
   y_raw <- attr(mf, "y_raw"); n <- nrow(mf); yname <- names(mf)[1]
   diag_fit <- lm(spec$formula, data = mf)
-  gf <- residual_g_factors(residuals(diag_fit))
+  res_full <- residuals(diag_fit)
+  gf <- residual_g_factors(res_full)
   Xd <- model.matrix(spec$formula, data = mf)
-  cond <- kappa(scale(Xd[, colnames(Xd) != "(Intercept)", drop = FALSE]), exact = TRUE)
-  disp <- dispatch_base(residuals(diag_fit), n)
+  Xs <- scale(Xd[, colnames(Xd) != "(Intercept)", drop = FALSE])
+  cond <- kappa(Xs, exact = TRUE)
+  # eigen-spectrum of the standardized slope Gram (referee diagnostic) ---------
+  evals <- sort(eigen(crossprod(Xs) / nrow(Xs), symmetric = TRUE,
+                      only.values = TRUE)$values, decreasing = TRUE)
+  lambda_max <- evals[1]; lambda_min <- evals[length(evals)]
+  # bootstrap CI for the residual platykurtosis g3 (cumulant-estimation noise) --
+  set.seed(seed + 777L)
+  g3_boot <- vapply(seq_len(500L), function(b) {
+    rb <- sample(res_full, length(res_full), replace = TRUE)
+    suppressWarnings(residual_g_factors(rb)$g3)
+  }, numeric(1))
+  g3_ci <- stats::quantile(g3_boot, c(0.025, 0.975), na.rm = TRUE)
+  disp <- dispatch_base(res_full, n)
 
   methods <- c("OLS", "PMM2", "PMM3", "RTE_CV", "RTE_Stable",
                "PMM2_RTE_Stable", "PMM3_RTE_Stable")
@@ -108,8 +121,10 @@ run_dataset <- function(spec, scale_name) {
   }
   list(results = do.call(rbind, res_rows), coefs = do.call(rbind, coef_rows),
        diag = data.frame(dataset_id = spec$id, dataset = spec$label, scale = scale_name,
-         n = n, cond = cond, gamma3 = gf$gamma3, gamma4 = gf$gamma4, g2 = gf$g2,
-         g3 = gf$g3, dispatch = disp$base, dispatch_status = disp$status,
+         n = n, cond = cond, lambda_max = lambda_max, lambda_min = lambda_min,
+         gamma3 = gf$gamma3, gamma4 = gf$gamma4, g2 = gf$g2, g3 = gf$g3,
+         g3_lo = unname(g3_ci[1]), g3_hi = unname(g3_ci[2]),
+         dispatch = disp$base, dispatch_status = disp$status,
          stringsAsFactors = FALSE))
 }
 
@@ -125,6 +140,14 @@ results <- do.call(rbind, all_res); coefs <- do.call(rbind, all_coef)
 diags   <- do.call(rbind, all_diag)
 write_csv_stamped(results, "realdata_results.csv")
 write_csv_stamped(coefs, "realdata_coefficients.csv")
+
+# Diagnostics for the large-trace discussion (referee Q5): condition number,
+# eigen-spectrum, residual platykurtosis g3 with bootstrap CI, and the PMM/PMM3
+# fit-convergence rate (mean ok over splits) per dataset x scale x method.
+conv <- aggregate(ok ~ dataset_id + scale + method, results, FUN = mean)
+names(conv)[names(conv) == "ok"] <- "convergence_rate"
+diagnostics <- merge(diags, conv, by = c("dataset_id", "scale"))
+write_csv_stamped(diagnostics, "realdata_diagnostics.csv")
 
 # Per dataset x scale x method: slope-variance trace + median RMSE -----------
 coef_var   <- aggregate(estimate ~ dataset_id + scale + method + term, coefs,

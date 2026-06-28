@@ -25,9 +25,11 @@ Cov(beta_PMM_RTE) ≈ g_S · Cov(beta_RTE)        (covariance transfer; g_S = g2
 | `scripts/` | Numbered entry points `01`–`05` (asymmetric MC · symmetric MC · real data · tables/figures · verification gates) |
 | `data/raw/` | Four vendored public datasets (see `data_manifest.md`) — no `utils::data()` dependency |
 | `results/` | Stored Monte Carlo **summaries**, diagnostics, and markdown reports |
+| `results/realdata_diagnostics.csv` | Per-dataset condition number, eigen-spectrum (`lambda_max/min`), residual `g3` with bootstrap CI, and per-method fit-convergence rate |
 | `results/tables/` | Pre-generated LaTeX tables T1–T5 used by the manuscript |
 | `results/figures/` | Pre-generated PDF figures + their backing CSVs |
 | `run_all.R` | Orchestrates `01 → 05` |
+| `refs.bib` | Bibliography of the manuscript (BibTeX) |
 | `session_info.txt` | R session info at package-preparation time |
 
 The multi-megabyte per-replication CSV/RDS dumps are **not** shipped (they are
@@ -103,3 +105,14 @@ deliberate grey-zone illustration, not a PMM proof case.
 ## Software versions
 
 See `session_info.txt` for the recorded R session. Prepared on R 4.5.x, macOS arm64.
+
+## Citation
+
+If you use this code or the stored results, please cite the manuscript:
+
+> S. Zabolotnii. *Polynomial-Maximization Ridge-Type Estimation for Multicollinear
+> Regression under Non-Gaussian Errors.* REVSTAT — Statistical Journal (under review).
+
+The full reference list of the manuscript is provided in `refs.bib`. The base ridge-type
+estimator is Akay et al. (2026, REVSTAT, doi:10.57805/revstat.vi.605); the PMM apparatus
+is Kunchenko (2002).

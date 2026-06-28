@@ -27,7 +27,9 @@ cat("[04] computing theory factor catalog (large-sample) ...\n")
 catalog <- dgp_catalog(n_big = 1e6)
 write_csv_stamped(catalog, "theory_factor_catalog.csv")
 write_tex(build_theory_factor_table(catalog), "T2_theory_factors.tex",
-          caption = "Theoretical cumulants and PMM variance-reduction factors $g_2,g_3$ by error family.",
+          caption = paste("Theoretical cumulants and PMM variance-reduction factors $g_2,g_3$ by error family.",
+                          "Here \\texttt{tn1.5} is the symmetric two-piece Normal (fold-and-sign, $\\lambda=1.5$;",
+                          "all moments finite, not Student-$t$); \\texttt{gamma2} is Gamma$(2,1)$, standardized."),
           label = "theory", digits = 3, fit_width = TRUE)
 
 # Representative regime cells for the MAIN-paper tables: the hardest multicollinear

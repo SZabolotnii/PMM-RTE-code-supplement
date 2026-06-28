@@ -1,2 +1,2 @@
 "dataset","n","cond","gamma3","gamma4","g2","g3","var_reduction_pmm3","mean_boot_ci_width","loo_slope_var_trace","status","est_version","phase","g_mode","reps","test_n","B_boot","delta_main","seed_base","generated"
-"MASS::cement (Portland/Hald)",13,37.1063420638455,0.201093731897657,-0.654653035932464,0.969941814202142,0.83423629423397,0.16576370576603,25.9512921508071,44.3984151895883,"illustrative","0.5.0-pmmrte","final","deployable",1000,5000,150,0.03,20260612,"2026-06-27 12:13:41 EEST"
+"MASS::cement (Portland/Hald)",13,37.1063420638455,0.201093731897657,-0.654653035932464,0.969941814202142,0.83423629423397,0.16576370576603,25.9512921508071,44.3984151895883,"illustrative","0.5.0-pmmrte","screening","deployable",500,2000,100,0.03,20260612,"2026-06-28 18:28:43 EEST"

@@ -1,0 +1,12 @@
+PMM-RTE verification — 2026-06-28 17:03:37 EEST
+  [PASS] G1 stamp columns present (est_version/phase/seed_base)
+  [PASS] G2a PMM2/OLS on normal in [0.85,1.15]
+  [PASS] G2b PMM2_RTE_Stable/RTE_CV on normal <= 1.15 (no harm)
+  [PASS] G4 median PMM2_RTE_Stable/RTE_CV on {gamma2,exp} = 0.203 < 0.85
+  [PASS] Defect-1 all RTE median_g >= 0 (no sign-flip region)
+  [PASS] Prop-2 |transferred ratio - g_S| < 0.10 (all benign scenarios)
+  [PASS] Prop-2 raw ~ transferred (operator transfers covariance)
+  [PASS] G5 median PMM3_RTE_Stable/RTE_CV on {uniform,tn1.5} = 0.266 < 0.90
+  [PASS] G6 >=1 real dataset with slope-var trace down >=10% and RMSE penalty <=5%
+  [PASS] G7 oracle present only as reference (median beta-MSE <= matched Stable)
+10 PASS, 0 HARD-FAIL, 0 WARN

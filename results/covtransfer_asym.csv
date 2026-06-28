@@ -1,0 +1,5 @@
+"scenario_id","order","n","p","rho","error","k_fixed","g_fixed","raw_cov_ratio","transferred_cov_ratio","gS_emp","reps","est_version","phase","g_mode","test_n","B_boot","delta_main","seed_base","generated"
+"ct_pmm2_n300_p4_rho0.80_exponential","pmm2",300,4,0.8,"exponential",1,1,0.497856922206524,0.497766649555107,0.47327628740554,1000,"0.5.0-pmmrte","final","deployable",5000,150,0.03,20260612,"2026-06-27 10:00:26 EEST"
+"ct_pmm2_n500_p4_rho0.80_gamma2","pmm2",500,4,0.8,"gamma2",1,1,0.595327439047683,0.595360442697482,0.596101264518343,1000,"0.5.0-pmmrte","final","deployable",5000,150,0.03,20260612,"2026-06-27 10:00:26 EEST"
+"ct_pmm2_n200_p8_rho0.90_gamma2","pmm2",200,8,0.9,"gamma2",1,1,0.613097996519129,0.613135391204664,0.620087312155307,1000,"0.5.0-pmmrte","final","deployable",5000,150,0.03,20260612,"2026-06-27 10:00:26 EEST"
+"ct_pmm2_n500_p4_rho0.80_exponential","pmm2",500,4,0.8,"exponential",1,1,0.488308227172492,0.488327535582832,0.481939873864679,1000,"0.5.0-pmmrte","final","deployable",5000,150,0.03,20260612,"2026-06-27 10:00:26 EEST"

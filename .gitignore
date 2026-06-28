@@ -1,0 +1,13 @@
+# R artifacts
+.Rhistory
+.RData
+.Rapp.history
+
+# macOS
+.DS_Store
+
+# Large regenerated per-replication outputs (regenerate via run_all.R)
+results/*_results.csv
+results/*_results.rds
+results/*_coefficients.csv
+results/mc_cache/

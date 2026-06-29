@@ -106,7 +106,8 @@ if (!is.null(asym))
 
 # Base-R figures (no ggplot2 dependency) -------------------------------------
 fig1 <- emit_eigen_curve()
-grDevices::pdf(file.path(CFG$paths$figures, "fig1_eigen_shrinkage.pdf"), width = 6, height = 4)
+fig1_path <- file.path(CFG$paths$figures, "fig1_eigen_shrinkage.pdf")
+grDevices::pdf(fig1_path, width = 6, height = 4)
 plot(NA, xlim = range(fig1$lambda), ylim = c(0, 1.1), log = "x",
      xlab = expression(lambda[j]), ylab = expression(s[j](k, g)),
      main = "RTE eigen-shrinkage factor")
@@ -118,6 +119,7 @@ for (i in seq_len(nrow(kg))) {
 legend("bottomright", legend = sprintf("k=%.2g, g=%.2g", kg$k, kg$g),
        col = seq_len(nrow(kg)), lwd = 2, bty = "n", cex = 0.8)
 abline(h = 1, lty = 3); grDevices::dev.off()
+normalize_pdf_metadata(fig1_path)
 
 # Forest-plot + dot-plot figures: these replace the dense synthetic/real-data tables in
 # the manuscript main text (the full tables move to the supplementary appendix).

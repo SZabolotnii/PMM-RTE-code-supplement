@@ -96,7 +96,7 @@ if (!is.null(asym)) {
 } else skip("G7 (no asym summary)")
 
 cat(sprintf("\n=== %d PASS, %d HARD-FAIL, %d WARN ===\n", PASS, HARD, SOFT))
-writeLines(c(sprintf("PMM-RTE verification — %s", format(Sys.time(), "%Y-%m-%d %H:%M:%S %Z")),
+writeLines(c(sprintf("PMM-RTE verification — %s", CFG$artifact_stamp),
              LOG, sprintf("%d PASS, %d HARD-FAIL, %d WARN", PASS, HARD, SOFT)),
            file.path(RES, "verify_log.txt"))
 if (HARD > 0L) stop(sprintf("Verification failed: %d hard gate(s).", HARD), call. = FALSE)

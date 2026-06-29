@@ -6,9 +6,9 @@ Open-code reproducibility bundle for:
 > under Non-Gaussian Errors**
 > Serhii Zabolotnii et al.
 
-It reproduces the manuscript's tables and figures for **PMM-RTE** — the composition
+It reproduces the manuscript's tables and figures for **PMM-RTE** -- the composition
 of a Kunchenko polynomial-maximization estimator (PMM2/PMM3) with the ridge-type
-estimator (RTE) of Akay et al. (REVSTAT v24-n1-3) for multicollinear linear
+estimator (RTE) of Akay et al. (REVSTAT 24(1), 45--70) for multicollinear linear
 regression. The headline claim concerns **coefficient stability (β-space variance)**;
 prediction RMSE is only a guardrail.
 
@@ -23,7 +23,7 @@ Cov(beta_PMM_RTE) ≈ g_S · Cov(beta_RTE)        (covariance transfer; g_S = g2
 |------|----------|
 | `R/` | Pipeline modules: `config.R` (single source of truth), `dgp.R`, `estimators.R`, `tuning.R`, `metrics.R`, `harness.R`, `reporting.R` |
 | `scripts/` | Numbered entry points `01`–`05` (asymmetric MC · symmetric MC · real data · tables/figures · verification gates) |
-| `data/raw/` | Four vendored public datasets (see `data_manifest.md`) — no `utils::data()` dependency |
+| `data/raw/` | Four vendored public datasets (see `data_manifest.md`) -- no `utils::data()` dependency |
 | `results/` | Stored Monte Carlo **summaries**, diagnostics, and markdown reports |
 | `results/realdata_diagnostics.csv` | Per-dataset condition number, eigen-spectrum (`lambda_max/min`), residual `g3` with bootstrap CI, and per-method fit-convergence rate |
 | `results/tables/` | Pre-generated LaTeX tables T1–T5 used by the manuscript |
@@ -54,7 +54,10 @@ Rscript --vanilla scripts/05_verify_results.R
 ```
 
 `05_verify_results.R` asserts the SPEC acceptance gates against the stored summary
-CSVs and exits non-zero if a hard gate fails.
+CSVs and exits non-zero if a hard gate fails. Numeric CSV/TeX/report stamps are
+fixed through `CFG$artifact_stamp`, and generated figure PDFs are normalized for
+R device `CreationDate`/`ModDate` metadata, so rerunning the quick check is
+byte-stable for the stored tables, figure PDFs, and verification log.
 
 ## Full rerun
 
@@ -76,9 +79,9 @@ Useful environment switches (defaults in `R/config.R`):
 | `REALDATA` | `1` include the slower real-data repeated-split block (default `0`) |
 | `REPS`, `TEST_N`, `B_BOOT` | numeric overrides for smoke runs |
 
-Verification is by reproduction: re-run a script and diff the regenerated
-`results/*_report.md` against the stored copy. **Never hand-edit files in `results/`** —
-regenerate them.
+Verification is by reproduction: re-run a script and inspect the regenerated
+`results/*_report.md`, stored summary CSVs, and `results/verify_log.txt`.
+**Never hand-edit files in `results/`** -- regenerate them.
 
 ## Method grammar (base × transform × tuning)
 
@@ -114,5 +117,5 @@ If you use this code or the stored results, please cite the manuscript:
 > Regression under Non-Gaussian Errors.* REVSTAT — Statistical Journal (under review).
 
 The full reference list of the manuscript is provided in `refs.bib`. The base ridge-type
-estimator is Akay et al. (2026, REVSTAT, doi:10.57805/revstat.vi.605); the PMM apparatus
-is Kunchenko (2002).
+estimator is Akay et al. (2026, REVSTAT 24(1), 45--70,
+doi:10.57805/revstat.v24i1.605); the PMM apparatus is Kunchenko (2002).

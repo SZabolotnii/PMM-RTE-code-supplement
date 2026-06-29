@@ -1,8 +1,11 @@
-# PMM-RTE data manifest
+# PMM-RTE Data Manifest
 
-Дата формування: 2026-06-12.
+Prepared: 2026-06-29 REVSTAT submission.
 
-Ця папка містить локальні копії наборів даних і скринінгові артефакти, які використовуються в PMM-RTE роботі. Мета - прибрати приховану залежність від `utils::data()` у R-пакетах і тримати всі data-related файли всередині article track.
+This directory contains local copies of the public datasets and screening
+artifacts used by the PMM-RTE study. The purpose is to remove hidden
+`utils::data()` dependencies on locally installed R packages and keep all
+data-related files inside the reproducibility track.
 
 ## raw
 
@@ -25,6 +28,13 @@
 
 ## Notes
 
-- Synthetic Monte Carlo datasets are generated on demand by `scripts/run_synthetic_pmm_rte_mc.R`; they are not stored as static raw data.
-- `scripts/run_realdata_pmm_rte.R` reads the three real-data pilot datasets from `data/raw`.
-- Portland/Hald cement is stored because it is used in the theoretical/practical discussion, but `n=13` means it should remain illustrative rather than a PMM proof dataset.
+- Synthetic Monte Carlo datasets are generated on demand by
+  `scripts/01_run_mc_asymmetric.R` and `scripts/02_run_mc_symmetric.R`; they are
+  not stored as static raw data.
+- `scripts/03_run_realdata.R` reads the real-data pilot datasets from
+  `data/raw`.
+- Portland/Hald cement is stored because it is used in the theoretical and
+  practical discussion, but `n = 13` keeps it illustrative rather than a PMM
+  proof dataset.
+- The raw datasets are public package datasets; see `data_manifest.md` for
+  provenance. Original dataset/package terms remain applicable to those files.

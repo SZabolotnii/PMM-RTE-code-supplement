@@ -6,6 +6,7 @@
 
 CFG <- list(
   est_version = "0.5.0-pmmrte",
+  artifact_stamp = "2026-06-29 REVSTAT submission",
   seed_base   = 20260612L,          # YYYYMMDD; CRN per-rep seed = seed_base + sid*1e6 + rep
   inner_frac  = 0.75,               # train/validation inner split for tuning
 
